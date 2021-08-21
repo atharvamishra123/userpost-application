@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addpost</title>
+</head>
+<body>
+<h4>Add Post</h4>
+
+<div class="container", align="center">
+
+{% if request.user.is_authenticated %}
+    <a href="{% url 'userlogout' %}">logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">login</a>
+{% endif %}
+<br>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+    {% endfor %}
+
+    {% if request.user.is_authenticated %}
+    <input type="submit" value="Submit">
+    {% else %}
+    <a href="{% url 'login' %}">Submit</a>
+    {% endif %}
+</form>
+<br>
+</div>
+
+</body>
+</html>
+
+
